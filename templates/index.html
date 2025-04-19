@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Погодный сайт</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Узнайте погоду</h1>
+        <form method="POST">
+            <input type="text" name="city" placeholder="Введите город" value="{{ city }}">
+            <button type="submit">Поиск</button>
+        </form>
+
+        {% if weather %}
+        <div class="weather-card">
+            <div class="weather-header">
+                <h2>{{ weather.city }}</h2>
+                <img src="http://openweathermap.org/img/wn/{{ weather.icon }}@2x.png" alt="{{ weather.description }}">
+            </div>
+            <div class="weather-info">
+                <p class="temp">{{ weather.temp }}°C</p>
+                <p class="description">{{ weather.description }}</p>
+                <div class="details">
+                    <p>Ощущается как: {{ weather.feels_like }}°C</p>
+                    <p>Влажность: {{ weather.humidity }}%</p>
+                    <p>Ветер: {{ weather.wind }} м/с</p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
